@@ -21,7 +21,7 @@ canvas {
     height: 100%;
 }
 
-#home-body {
+.main {
     margin: 0px 50px;
     display: flex;
     align-items: center;
@@ -41,7 +41,7 @@ canvas {
     align-items: center;
     justify-content: center;
     width: 800px;
-    font-size: 70px;
+    font-size: 40px;
 }
 
 #steps {
