@@ -21,7 +21,7 @@ canvas {
     height: 100%;
 }
 
-.main {
+#main {
     margin: 0px 50px;
     display: flex;
     align-items: center;
