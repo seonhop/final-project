@@ -1,4 +1,4 @@
-import { distance } from "./utils.js";
+import { distance } from "/utils.js";
 
 class Ripple {
     constructor() {
