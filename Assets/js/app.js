@@ -1,6 +1,104 @@
-import {Ripple} from './ripple.js';
-import {Dot} from './dot.js';
-import {collide} from '/Assets/js/utils.js'
+// import {Ripple} from './ripple.js';
+// import {Dot} from './dot.js';
+// import {collide} from '/Assets/js/utils.js'
+
+function distance(x1, y1, x2, y2) {
+    const x = x2 - x1;
+    const y = y2 - y1; 
+    return Math.sqrt(x * x + y * y);
+}
+
+function collide(x1, y1, x2, y2, radius) {
+    if (distance(x1, y1, x2, y2) <= radius) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+const PI2 = Math.PI * 2;
+const BOUNCE = 0.82;
+
+class Dot {
+    constructor(x, y, radius, pixelSize, red, green, blue) {
+        this.x = x;
+        this.y = y;
+        this.targetRadius = radius;
+        this.radius = 0;
+        this.radiusV = 0;
+        this.radius = radius;
+        this.pixelSize = pixelSize;
+        this.pixelSizeHalf = pixelSize / 2;
+        this.red = red;
+        this.green = green;
+        this.blue = blue;
+    }
+
+    animate(ctx) {
+        ctx.beginPath();
+        ctx.fillStyle = '#000';
+        ctx.fillRect(
+            this.x - this.pixelSizeHalf,
+            this.y - this.pixelSizeHalf,
+            this.pixelSize, this.pixelSize
+        );
+
+        const accel = (this.targetRadius - this.radius) / 2;
+        this.radiusV += accel;
+        this.radiusV *= BOUNCE;
+        this.radius += this.radiusV;
+
+        ctx.beginPath();
+        ctx.fillStyle = `rgb(${this.red}, ${this.green}, ${this.blue})`;
+        // ctx.rect(this.x, this.y, this.radius*2, this.radius*2);
+        ctx.arc(this.x, this.y, this.radius, 0, PI2, false);
+        ctx.fill();
+    }
+
+    reset() {
+        this.radius = 0;
+        this.radiusV = 0;
+
+        
+    }
+}
+
+class Ripple {
+    constructor() {
+        this.x = 0;
+        this.y = 0;
+        this.radius = 0;
+        this.maxRadius = 0;
+        this.speed = 10;
+    }
+
+    resize(stageWidth, stageHeight) {
+        this.stageWidth = stageWidth;
+        this.stageHeight = stageHeight;
+    }
+
+    start(x, y) {
+        this.x = x;
+        this.y = y;
+        this.radius = 0;
+        this.maxRadius = this.getMax(x, y);
+
+    }
+
+    animate() {
+        if (this.radius < this.maxRadius) {
+            this.radius += this.speed;
+        }
+    }
+
+    getMax(x, y) {
+        const c1 = distance(0, 0, x, y);
+        const c2 = distance(this.stageWidth, 0, x, y);
+        const c3 = distance(0, this.stageHeight, x, y);
+        const c4 = distance(this.stageWidth, this.stageHeight, x, y);
+        return Math.max(c1, c2, c3, c4);
+    }
+}
 
 class App {
     constructor(imgDataURL) {
