@@ -1,6 +1,6 @@
-import {Ripple} from 'final-project/Assets/js/ripple.js';
-import {Dot} from 'final-project/Assets/js/dot.js';
-import {collide} from 'final-project/Assets/js/utils.js'
+import {Ripple} from '/Assets/js/ripple.js';
+import {Dot} from '/Assets/js/dot.js';
+import {collide} from '/Assets/js/utils.js'
 
 class App {
     constructor(imgDataURL) {
