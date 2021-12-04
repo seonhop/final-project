@@ -32,6 +32,8 @@ canvas {
     height: 100%;
     font-family: 'Roboto Mono', monospace;
     color: #fff;
+    background-color: #000;
+    position: relative;
 
 }
 
@@ -50,8 +52,8 @@ canvas {
     /* align-items: center; */
     justify-content: center;
     width: 800px;
-    margin-top: 50px;
-    margin-bottom: 50px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 #step-title {

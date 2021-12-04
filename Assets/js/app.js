@@ -102,7 +102,7 @@ class Ripple {
 
 class App {
     constructor(imgDataURL) {
-        document.getElementById('home-body').remove();
+        document.getElementById('main').remove();
         this.canvas = document.createElement('canvas');
         document.body.appendChild(this.canvas);
         this.ctx = this.canvas.getContext('2d');
